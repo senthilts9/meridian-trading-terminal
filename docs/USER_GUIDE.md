@@ -96,8 +96,8 @@ actually means underneath: a `GET /api/orders/{id}` call. A filled IOC order loo
 }
 ```
 
-`status: CLOSED` + `remaining_size: 0` = fully filled, nothing left resting. (For Paradex,
-"CLOSED" is their status for a terminated order — filled or cancelled; `avg_fill_price`
+`status: CLOSED` + `remaining_size: 0` = fully filled, nothing left resting. (For the
+exchange, "CLOSED" is their status for a terminated order — filled or cancelled; `avg_fill_price`
 being non-empty is what tells you it filled rather than got cancelled.)
 
 ---
@@ -131,7 +131,7 @@ shows in the "Open Positions" table:
 
 ![Position open, live P&L](screenshots/dashboard-position-open.png)
 
-You're now **long 0.00023 BTC at $66,001**, 50x leverage (Paradex's default for this
+You're now **long 0.00023 BTC at $66,001**, 50x leverage (the exchange's default for this
 market), unrealized P&L moving with the mark price in real time.
 
 ---

@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "Paradex Testnet - Trade Lifecycle",
-    "description": "Public + private Paradex testnet REST endpoints covering the full trade lifecycle: market data -> auth -> account -> place order -> check order -> check fill -> position/PnL -> close position -> trade history.\n\nPrivate requests need {{jwt_token}}. Paradex auth is SIWE (EIP-191) signed with your Starknet-derived L2 key -- Postman cannot produce that signature on its own. Get a token by running `python scripts/get_jwt_for_postman.py` (prints a fresh 5-minute JWT) and paste it into the `jwt_token` collection variable, or into the Paradex_Testnet environment.",
+    "name": "Exchange Testnet - Trade Lifecycle",
+    "description": "Public + private exchange testnet REST endpoints covering the full trade lifecycle: market data -> auth -> account -> place order -> check order -> check fill -> position/PnL -> close position -> trade history.\n\nPrivate requests need {{jwt_token}}. Auth is SIWE (EIP-191) signed with your Starknet-derived L2 key -- Postman cannot produce that signature on its own. Get a token by running `python scripts/get_jwt_for_postman.py` (prints a fresh 5-minute JWT) and paste it into the `jwt_token` collection variable, or into the Exchange_Testnet environment.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -110,7 +110,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"market\": \"{{market}}\",\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"size\": \"0.0002\",\n  \"instruction\": \"IOC\",\n  \"client_id\": \"postman-buy-{{$timestamp}}\",\n  \"signature\": \"<computed by paradex_py SDK -- see scripts/03_place_order.py>\",\n  \"signature_timestamp\": \"<computed by SDK>\"\n}"
+              "raw": "{\n  \"market\": \"{{market}}\",\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"size\": \"0.0002\",\n  \"instruction\": \"IOC\",\n  \"client_id\": \"postman-buy-{{$timestamp}}\",\n  \"signature\": \"<computed by the exchange SDK -- see scripts/03_place_order.py>\",\n  \"signature_timestamp\": \"<computed by SDK>\"\n}"
             }
           }
         },
@@ -159,7 +159,7 @@
             "header": [{ "key": "Content-Type", "value": "application/json" }],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"market\": \"{{market}}\",\n  \"side\": \"SELL\",\n  \"type\": \"MARKET\",\n  \"size\": \"0.0002\",\n  \"instruction\": \"IOC\",\n  \"flags\": [\"REDUCE_ONLY\"],\n  \"client_id\": \"postman-close-{{$timestamp}}\",\n  \"signature\": \"<computed by paradex_py SDK -- see scripts/07_close_position.py>\",\n  \"signature_timestamp\": \"<computed by SDK>\"\n}"
+              "raw": "{\n  \"market\": \"{{market}}\",\n  \"side\": \"SELL\",\n  \"type\": \"MARKET\",\n  \"size\": \"0.0002\",\n  \"instruction\": \"IOC\",\n  \"flags\": [\"REDUCE_ONLY\"],\n  \"client_id\": \"postman-close-{{$timestamp}}\",\n  \"signature\": \"<computed by the exchange SDK -- see scripts/07_close_position.py>\",\n  \"signature_timestamp\": \"<computed by SDK>\"\n}"
             }
           }
         }
