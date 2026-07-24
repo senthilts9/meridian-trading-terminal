@@ -1,0 +1,211 @@
+{
+  "info": {
+    "name": "Paradex Testnet - Trade Lifecycle",
+    "description": "Public + private Paradex testnet REST endpoints covering the full trade lifecycle: market data -> auth -> account -> place order -> check order -> check fill -> position/PnL -> close position -> trade history.\n\nPrivate requests need {{jwt_token}}. Paradex auth is SIWE (EIP-191) signed with your Starknet-derived L2 key -- Postman cannot produce that signature on its own. Get a token by running `python scripts/get_jwt_for_postman.py` (prints a fresh 5-minute JWT) and paste it into the `jwt_token` collection variable, or into the Paradex_Testnet environment.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "https://api.testnet.paradex.trade/v1" },
+    { "key": "market", "value": "BTC-USD-PERP" },
+    { "key": "jwt_token", "value": "" },
+    { "key": "order_id", "value": "" },
+    { "key": "client_id", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Public - System & Market Data",
+      "item": [
+        {
+          "name": "System State",
+          "request": { "method": "GET", "url": "{{base_url}}/system/state" }
+        },
+        {
+          "name": "System Time",
+          "request": { "method": "GET", "url": "{{base_url}}/system/time" }
+        },
+        {
+          "name": "System Config",
+          "request": { "method": "GET", "url": "{{base_url}}/system/config" }
+        },
+        {
+          "name": "Markets (config)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/markets?market={{market}}",
+              "host": ["{{base_url}}"], "path": ["markets"],
+              "query": [{ "key": "market", "value": "{{market}}" }]
+            }
+          }
+        },
+        {
+          "name": "Markets Summary (24h + mark price)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/markets/summary?market={{market}}",
+              "host": ["{{base_url}}"], "path": ["markets", "summary"],
+              "query": [{ "key": "market", "value": "{{market}}" }]
+            }
+          }
+        },
+        {
+          "name": "Orderbook",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orderbook/{{market}}?depth=5",
+              "host": ["{{base_url}}"], "path": ["orderbook", "{{market}}"],
+              "query": [{ "key": "depth", "value": "5" }]
+            }
+          }
+        },
+        {
+          "name": "BBO (best bid/offer)",
+          "request": { "method": "GET", "url": "{{base_url}}/bbo/{{market}}" }
+        },
+        {
+          "name": "Recent Trades (public tape)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/trades?market={{market}}&page_size=20",
+              "host": ["{{base_url}}"], "path": ["trades"],
+              "query": [
+                { "key": "market", "value": "{{market}}" },
+                { "key": "page_size", "value": "20" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Private - Account",
+      "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{jwt_token}}" }] },
+      "item": [
+        {
+          "name": "Account Summary (value, margin, free collateral)",
+          "request": { "method": "GET", "url": "{{base_url}}/account" }
+        },
+        {
+          "name": "Balances",
+          "request": { "method": "GET", "url": "{{base_url}}/balance" }
+        },
+        {
+          "name": "Positions",
+          "request": { "method": "GET", "url": "{{base_url}}/positions" }
+        }
+      ]
+    },
+    {
+      "name": "Private - Orders",
+      "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{jwt_token}}" }] },
+      "item": [
+        {
+          "name": "Place Order (MARKET BUY, IOC)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/orders",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market\": \"{{market}}\",\n  \"side\": \"BUY\",\n  \"type\": \"MARKET\",\n  \"size\": \"0.0002\",\n  \"instruction\": \"IOC\",\n  \"client_id\": \"postman-buy-{{$timestamp}}\",\n  \"signature\": \"<computed by paradex_py SDK -- see scripts/03_place_order.py>\",\n  \"signature_timestamp\": \"<computed by SDK>\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Fetch Order by ID",
+          "request": { "method": "GET", "url": "{{base_url}}/orders/{{order_id}}" }
+        },
+        {
+          "name": "Fetch Order by client_id",
+          "request": { "method": "GET", "url": "{{base_url}}/orders/by_client_id/{{client_id}}" }
+        },
+        {
+          "name": "List Open Orders",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders?market={{market}}",
+              "host": ["{{base_url}}"], "path": ["orders"],
+              "query": [{ "key": "market", "value": "{{market}}" }]
+            }
+          }
+        },
+        {
+          "name": "Orders History",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/orders-history?market={{market}}&page_size=20",
+              "host": ["{{base_url}}"], "path": ["orders-history"],
+              "query": [
+                { "key": "market", "value": "{{market}}" },
+                { "key": "page_size", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Cancel Order by ID",
+          "request": { "method": "DELETE", "url": "{{base_url}}/orders/{{order_id}}" }
+        },
+        {
+          "name": "Close Position (MARKET SELL, reduce_only)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/orders",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"market\": \"{{market}}\",\n  \"side\": \"SELL\",\n  \"type\": \"MARKET\",\n  \"size\": \"0.0002\",\n  \"instruction\": \"IOC\",\n  \"flags\": [\"REDUCE_ONLY\"],\n  \"client_id\": \"postman-close-{{$timestamp}}\",\n  \"signature\": \"<computed by paradex_py SDK -- see scripts/07_close_position.py>\",\n  \"signature_timestamp\": \"<computed by SDK>\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Private - Fills & History",
+      "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{jwt_token}}" }] },
+      "item": [
+        {
+          "name": "Fills",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/fills?market={{market}}&page_size=20",
+              "host": ["{{base_url}}"], "path": ["fills"],
+              "query": [
+                { "key": "market", "value": "{{market}}" },
+                { "key": "page_size", "value": "20" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Transactions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/transactions?page_size=20",
+              "host": ["{{base_url}}"], "path": ["transactions"],
+              "query": [{ "key": "page_size", "value": "20" }]
+            }
+          }
+        },
+        {
+          "name": "Funding Payments",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/funding/payments?market={{market}}",
+              "host": ["{{base_url}}"], "path": ["funding", "payments"],
+              "query": [{ "key": "market", "value": "{{market}}" }]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+paradex-py==0.6.3
+eth-account==0.13.7
+python-dotenv==1.0.1
+pip-system-certs==5.2

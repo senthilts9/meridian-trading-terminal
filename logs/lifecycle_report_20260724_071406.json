@@ -1,0 +1,315 @@
+{
+  "started_at": "2026-07-23T23:14:06.722434+00:00",
+  "market": "BTC-USD-PERP",
+  "l2_address": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+  "jwt_acquired": true,
+  "account_before": "AccountSummary(account='0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a', initial_margin_requirement='1.011', maintenance_margin_requirement='1.011', account_value='100001.011', total_collateral='100001.011', free_collateral='100000', margin_cushion='100000', settlement_asset='USDC', updated_at=1784848442443, status='ACTIVE', seq_no=1784848442443115601)",
+  "market_snapshot": {
+    "market": "BTC-USD-PERP",
+    "seq_no": 664,
+    "ask": "66001",
+    "ask_size": "0.98817",
+    "bid": "66000",
+    "bid_size": "0.60434",
+    "last_updated_at": 1784836707815
+  },
+  "buy_order_submitted": {
+    "id": "1784848448630201703945910000",
+    "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+    "market": "BTC-USD-PERP",
+    "side": "BUY",
+    "type": "MARKET",
+    "size": "0.00023",
+    "remaining_size": "0.00023",
+    "price": "0",
+    "status": "NEW",
+    "created_at": 1784848448634,
+    "last_updated_at": 1784848448634,
+    "timestamp": 1784848448548,
+    "cancel_reason": "",
+    "client_id": "bot_buy_20260724071408548052",
+    "seq_no": 1784848448634795771,
+    "instruction": "IOC",
+    "avg_fill_price": "",
+    "stp": "EXPIRE_TAKER",
+    "received_at": 1784848448624,
+    "published_at": 1784848448636,
+    "flags": [
+      "TARGET_STRATEGY_VWAP"
+    ],
+    "trigger_price": "0"
+  },
+  "buy_order_final": {
+    "id": "1784848448630201703945910000",
+    "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+    "market": "BTC-USD-PERP",
+    "side": "BUY",
+    "type": "MARKET",
+    "size": "0.00023",
+    "remaining_size": "0",
+    "price": "69304.8",
+    "status": "CLOSED",
+    "created_at": 1784848448634,
+    "last_updated_at": 1784848448771,
+    "timestamp": 1784848448548,
+    "cancel_reason": "",
+    "client_id": "bot_buy_20260724071408548052",
+    "seq_no": 1784848448771461538,
+    "instruction": "IOC",
+    "avg_fill_price": "66001",
+    "stp": "EXPIRE_TAKER",
+    "received_at": 1784848449808,
+    "published_at": 1784848449819,
+    "flags": [
+      "TARGET_STRATEGY_VWAP"
+    ],
+    "trigger_price": "0"
+  },
+  "fills_after_buy": {
+    "next": null,
+    "prev": null,
+    "results": [
+      {
+        "id": "1784848448760201703978190001",
+        "side": "BUY",
+        "liquidity": "TAKER",
+        "market": "BTC-USD-PERP",
+        "order_id": "1784848448630201703945910000",
+        "price": "66001",
+        "size": "0.00023",
+        "fee": "0",
+        "fee_currency": "USDC",
+        "created_at": 1784848448771,
+        "remaining_size": "0",
+        "client_id": "bot_buy_20260724071408548052",
+        "fill_type": "FILL",
+        "realized_pnl": "0",
+        "realized_funding": "0",
+        "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+        "underlying_price": "65127.89829597",
+        "flags": [
+          "fastfill"
+        ],
+        "orderbook_seq_no": 665
+      }
+    ]
+  },
+  "position_after_buy": {
+    "id": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a-BTC-USD-PERP",
+    "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+    "market": "BTC-USD-PERP",
+    "status": "OPEN",
+    "side": "LONG",
+    "size": "0.00023",
+    "average_entry_price": "66001",
+    "average_entry_price_usd": "66001",
+    "average_exit_price": "0",
+    "unrealized_pnl": "0.0008316",
+    "unrealized_funding_pnl": "0",
+    "cost": "15.18023",
+    "cost_usd": "15.18023",
+    "cached_funding_index": "68.69163122",
+    "last_updated_at": 1784848448788,
+    "created_at": 1784848448787,
+    "last_fill_id": "1784848448760201703978190001",
+    "seq_no": 1784848448788322234,
+    "liquidation_price": "",
+    "leverage": "50",
+    "realized_positional_pnl": "0",
+    "realized_positional_funding_pnl": "0"
+  },
+  "account_pnl_with_position": "AccountSummary(account='0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a', initial_margin_requirement='1.011', maintenance_margin_requirement='1.011', account_value='100001.011', total_collateral='100001.011', free_collateral='100000', margin_cushion='100000', settlement_asset='USDC', updated_at=1784848447420, status='ACTIVE', seq_no=1784848447420496417)",
+  "close_order_submitted": {
+    "id": "1784848450250201703945910000",
+    "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+    "market": "BTC-USD-PERP",
+    "side": "SELL",
+    "type": "MARKET",
+    "size": "0.00023",
+    "remaining_size": "0.00023",
+    "price": "0",
+    "status": "NEW",
+    "created_at": 1784848450259,
+    "last_updated_at": 1784848450259,
+    "timestamp": 1784848450178,
+    "cancel_reason": "",
+    "client_id": "bot_sell_20260724071410178451",
+    "seq_no": 1784848450259809631,
+    "instruction": "IOC",
+    "avg_fill_price": "",
+    "stp": "EXPIRE_TAKER",
+    "received_at": 1784848450254,
+    "published_at": 1784848450261,
+    "flags": [
+      "REDUCE_ONLY",
+      "TARGET_STRATEGY_VWAP"
+    ],
+    "trigger_price": "0"
+  },
+  "close_order_final": {
+    "id": "1784848450250201703945910000",
+    "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+    "market": "BTC-USD-PERP",
+    "side": "SELL",
+    "type": "MARKET",
+    "size": "0.00023",
+    "remaining_size": "0",
+    "price": "62704.3",
+    "status": "CLOSED",
+    "created_at": 1784848450259,
+    "last_updated_at": 1784848450311,
+    "timestamp": 1784848450178,
+    "cancel_reason": "",
+    "client_id": "bot_sell_20260724071410178451",
+    "seq_no": 1784848450311152456,
+    "instruction": "IOC",
+    "avg_fill_price": "66000",
+    "stp": "EXPIRE_TAKER",
+    "received_at": 1784848450338,
+    "published_at": 1784848450349,
+    "flags": [
+      "REDUCE_ONLY",
+      "TARGET_STRATEGY_VWAP"
+    ],
+    "trigger_price": "0"
+  },
+  "position_after_close": null,
+  "trade_history": {
+    "orders_history": {
+      "next": null,
+      "prev": null,
+      "results": [
+        {
+          "id": "1784848450250201703945910000",
+          "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+          "market": "BTC-USD-PERP",
+          "side": "SELL",
+          "type": "MARKET",
+          "size": "0.00023",
+          "remaining_size": "0",
+          "price": "0",
+          "status": "CLOSED",
+          "created_at": 1784848450259,
+          "last_updated_at": 1784848450311,
+          "timestamp": 0,
+          "cancel_reason": "",
+          "client_id": "bot_sell_20260724071410178451",
+          "seq_no": 1784848450311152456,
+          "instruction": "IOC",
+          "avg_fill_price": "66000",
+          "stp": "EXPIRE_TAKER",
+          "received_at": 1784848450504,
+          "published_at": 1784848450507,
+          "flags": [
+            "REDUCE_ONLY",
+            "TARGET_STRATEGY_VWAP"
+          ],
+          "trigger_price": "0"
+        },
+        {
+          "id": "1784848448630201703945910000",
+          "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+          "market": "BTC-USD-PERP",
+          "side": "BUY",
+          "type": "MARKET",
+          "size": "0.00023",
+          "remaining_size": "0",
+          "price": "0",
+          "status": "CLOSED",
+          "created_at": 1784848448634,
+          "last_updated_at": 1784848448771,
+          "timestamp": 0,
+          "cancel_reason": "",
+          "client_id": "bot_buy_20260724071408548052",
+          "seq_no": 1784848448771461538,
+          "instruction": "IOC",
+          "avg_fill_price": "66001",
+          "stp": "EXPIRE_TAKER",
+          "received_at": 1784848450504,
+          "published_at": 1784848450507,
+          "flags": [
+            "TARGET_STRATEGY_VWAP"
+          ],
+          "trigger_price": "0"
+        }
+      ]
+    },
+    "fills": {
+      "next": null,
+      "prev": null,
+      "results": [
+        {
+          "id": "1784848450300201703978190001",
+          "side": "SELL",
+          "liquidity": "TAKER",
+          "market": "BTC-USD-PERP",
+          "order_id": "1784848450250201703945910000",
+          "price": "66000",
+          "size": "0.00023",
+          "fee": "0",
+          "fee_currency": "USDC",
+          "created_at": 1784848450311,
+          "remaining_size": "0",
+          "client_id": "bot_sell_20260724071410178451",
+          "fill_type": "FILL",
+          "realized_pnl": "-0.00023",
+          "realized_funding": "0",
+          "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+          "underlying_price": "65127.89829597",
+          "flags": [
+            "fastfill"
+          ],
+          "orderbook_seq_no": 666
+        },
+        {
+          "id": "1784848448760201703978190001",
+          "side": "BUY",
+          "liquidity": "TAKER",
+          "market": "BTC-USD-PERP",
+          "order_id": "1784848448630201703945910000",
+          "price": "66001",
+          "size": "0.00023",
+          "fee": "0",
+          "fee_currency": "USDC",
+          "created_at": 1784848448771,
+          "remaining_size": "0",
+          "client_id": "bot_buy_20260724071408548052",
+          "fill_type": "FILL",
+          "realized_pnl": "0",
+          "realized_funding": "0",
+          "account": "0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a",
+          "underlying_price": "65127.89829597",
+          "flags": [
+            "fastfill"
+          ],
+          "orderbook_seq_no": 665
+        }
+      ]
+    },
+    "transactions": {
+      "next": null,
+      "prev": null,
+      "results": [
+        {
+          "id": "1784848448760201703978190001",
+          "type": "TRANSACTION_FILL",
+          "hash": "0x31c614a9ea8fd333a8658f085402fb662902903eed0fb3c5fe178c08b0aada8",
+          "state": "PRE_CONFIRMED",
+          "created_at": 1784848449551,
+          "completed_at": 1784848450527
+        },
+        {
+          "id": "1784848042910201703980870000",
+          "type": "TRANSACTION_ACC_DEPLOY",
+          "hash": "0x2ddf0529dfb7be09734884e35b4e4e49488b91caf277c39a0d83144e639edc6",
+          "state": "PRE_CONFIRMED",
+          "created_at": 1784848043070,
+          "completed_at": 0
+        }
+      ]
+    }
+  },
+  "account_after": "AccountSummary(account='0x6e2c83bd987b3a20faf9f20a78a8827db64163f2de42d021c7229212b5c870a', initial_margin_requirement='1.011', maintenance_margin_requirement='1.011', account_value='100001.011', total_collateral='100001.011', free_collateral='100000', margin_cushion='100000', settlement_asset='USDC', updated_at=1784848447420, status='ACTIVE', seq_no=1784848447420496417)",
+  "completed_at": "2026-07-23T23:14:10.763332+00:00",
+  "result": "SUCCESS"
+}

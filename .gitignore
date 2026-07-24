@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+*.pyc
+.env
+corp-ca-bundle.pem
+
+# logs/ is intentionally NOT ignored -- it holds run logs and lifecycle_report_*.json
+# evidence files that demonstrate the trade lifecycle actually worked.

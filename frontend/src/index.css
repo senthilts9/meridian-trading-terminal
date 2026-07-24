@@ -1,0 +1,460 @@
+:root {
+  --bg: #0a0d12;
+  --panel: #10141b;
+  --panel-alt: #141a23;
+  --border: #1c222c;
+  --text: #e7ebf0;
+  --muted: #7d8a9c;
+  --dim: #4d5866;
+  --green: #16c784;
+  --green-dim: #0e3f2e;
+  --red: #ea3943;
+  --red-dim: #3f1a1e;
+  --accent: #3b82f6;
+  --accent-dim: #16233d;
+  --mono: "SFMono-Regular", "JetBrains Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 14px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+/* ---- Header ---- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.header .brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.header .brand h1 {
+  font-size: 16px;
+  margin: 0;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+.header .brand .env-pill {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.header .status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dim);
+}
+
+.dot.ok {
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+}
+
+.dot.err {
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+}
+
+/* ---- Layout ---- */
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ---- Panel ---- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel-alt);
+}
+
+.panel-header h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 0;
+  font-weight: 600;
+}
+
+.panel-body {
+  padding: 14px;
+}
+
+/* ---- Market ticker ---- */
+.market-select {
+  display: flex;
+  gap: 6px;
+}
+
+.market-select button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--mono);
+}
+
+.market-select button.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.ticker {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.ticker .price {
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.ticker .stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ticker .stat .label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ticker .stat .value {
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.up {
+  color: var(--green);
+}
+
+.down {
+  color: var(--red);
+}
+
+/* ---- Order book mini ---- */
+.book {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.book .side .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 6px;
+}
+
+.book .asks .row {
+  color: var(--red);
+}
+
+.book .bids .row {
+  color: var(--green);
+}
+
+/* ---- Tables ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+
+th {
+  text-align: left;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.empty-row td {
+  color: var(--dim);
+  text-align: center;
+  padding: 20px;
+  font-family: var(--sans);
+}
+
+.side-badge {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.side-badge.buy,
+.side-badge.long {
+  background: var(--green-dim);
+  color: var(--green);
+}
+
+.side-badge.sell,
+.side-badge.short {
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+/* ---- Account panel ---- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-tile {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.stat-tile .label {
+  font-size: 10.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.stat-tile .value {
+  font-family: var(--mono);
+  font-size: 16px;
+}
+
+/* ---- Order ticket ---- */
+.ticket-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ticket-tabs button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.ticket-tabs button.buy.active {
+  background: var(--green-dim);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.ticket-tabs button.sell.active {
+  background: var(--red-dim);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.field {
+  margin-bottom: 12px;
+}
+
+.field label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.submit-btn.buy {
+  background: var(--green);
+  color: #04150e;
+}
+
+.submit-btn.sell {
+  background: var(--red);
+  color: #200507;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.close-btn {
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.toast {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--mono);
+}
+
+.toast.success {
+  background: var(--green-dim);
+  color: var(--green);
+  border: 1px solid rgba(22, 199, 132, 0.3);
+}
+
+.toast.error {
+  background: var(--red-dim);
+  color: var(--red);
+  border: 1px solid rgba(234, 57, 67, 0.3);
+}
+
+/* ---- Footer ---- */
+.footer {
+  padding: 14px 24px;
+  border-top: 1px solid var(--border);
+  color: var(--dim);
+  font-size: 11.5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer a {
+  color: var(--dim);
+}
