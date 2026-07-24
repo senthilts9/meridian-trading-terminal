@@ -63,6 +63,15 @@ export interface OrderRecord {
   created_at: number;
 }
 
+export interface Candle {
+  time: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
+
 export interface Fill {
   id: string;
   side: "BUY" | "SELL";

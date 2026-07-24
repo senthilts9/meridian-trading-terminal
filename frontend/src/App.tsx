@@ -8,7 +8,8 @@ import { MarketPanel } from "./components/MarketPanel";
 import { OrderTicket } from "./components/OrderTicket";
 import { OrdersTable } from "./components/OrdersTable";
 import { PositionsTable } from "./components/PositionsTable";
-import type { AccountSummary, Bbo, Fill, MarketSummary, OrderRecord, Position } from "./types";
+import { PriceChart } from "./components/PriceChart";
+import type { AccountSummary, Bbo, Candle, Fill, MarketSummary, OrderRecord, Position } from "./types";
 
 const MARKETS = ["BTC-USD-PERP", "ETH-USD-PERP"];
 
@@ -22,6 +23,7 @@ export default function App() {
   const [openOrders, setOpenOrders] = useState<OrderRecord[]>([]);
   const [history, setHistory] = useState<OrderRecord[]>([]);
   const [fills, setFills] = useState<Fill[]>([]);
+  const [candles, setCandles] = useState<Candle[]>([]);
   const wsRef = useRef<WebSocket | null>(null);
 
   const refreshSnapshot = useCallback(async () => {
@@ -50,6 +52,34 @@ export default function App() {
     refreshSnapshot().catch(console.error);
   }, [refreshSnapshot]);
 
+  // Candles: fetch on market change, then refresh every 30s
+  useEffect(() => {
+    let cancelled = false;
+    const load = () => {
+      api
+        .klines(market, "15", 24)
+        .then((res) => {
+          if (cancelled) return;
+          const parsed = res.results.map(([time, open, high, low, close, volume]) => ({
+            time,
+            open,
+            high,
+            low,
+            close,
+            volume,
+          }));
+          setCandles(parsed);
+        })
+        .catch(console.error);
+    };
+    load();
+    const interval = setInterval(load, 30000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
+  }, [market]);
+
   // Live feed: BBO + account + positions over WebSocket
   useEffect(() => {
     const ws = new WebSocket(`${WS_BASE_URL}/ws/${market}`);
@@ -70,6 +100,7 @@ export default function App() {
       <div className="layout">
         <div className="col">
           <MarketPanel markets={MARKETS} selected={market} onSelect={setMarket} summary={summary} bbo={bbo} />
+          <PriceChart candles={candles} market={market} />
           <PositionsTable positions={positions} onChanged={refreshSnapshot} />
           <OrdersTable orders={openOrders} title="Open Orders" />
           <OrdersTable orders={history} title="Order History" />

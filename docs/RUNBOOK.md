@@ -202,9 +202,10 @@ positions, orders (place/history), and fills, plus a `/ws/{market}` WebSocket th
 BBO + account + positions every 2s so the UI updates live without polling.
 
 The frontend (`frontend/`) is a Vite + React + TypeScript dashboard: market ticker with
-live bid/ask, account panel (value/margin/free collateral), an order ticket (buy/sell,
-market or limit), an open-positions table with a one-click Close button, open orders,
-order history, and fills — all real data, no mocks.
+live bid/ask, a 15m candlestick price chart (from `GET /markets/klines`, hover for OHLC
+detail), account panel (value/margin/free collateral), an order ticket (buy/sell, market
+or limit), an open-positions table with a one-click Close button, open orders, order
+history, and fills — all real data, no mocks.
 
 **Run both:**
 

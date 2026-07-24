@@ -6,6 +6,7 @@ it only ever talks to this server.
 """
 import asyncio
 import json
+import time
 from datetime import datetime, timezone
 from decimal import Decimal
 
@@ -53,6 +54,15 @@ def market_summary(market: str):
 @app.get("/api/markets/{market}/orderbook")
 def orderbook(market: str, depth: int = 10):
     return public_client().api_client.fetch_orderbook(market=market, params={"depth": depth})
+
+
+@app.get("/api/markets/{market}/klines")
+def klines(market: str, resolution: str = "15", hours: int = 24):
+    end_at = int(time.time() * 1000)
+    start_at = end_at - hours * 3600 * 1000
+    return public_client().api_client.fetch_klines(
+        symbol=market, resolution=resolution, start_at=start_at, end_at=end_at
+    )
 
 
 @app.get("/api/markets/{market}/bbo")

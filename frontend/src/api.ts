@@ -18,6 +18,8 @@ export const api = {
   marketSummary: (market: string) => request(`/api/markets/${market}/summary`),
   orderbook: (market: string, depth = 10) => request(`/api/markets/${market}/orderbook?depth=${depth}`),
   bbo: (market: string) => request(`/api/markets/${market}/bbo`),
+  klines: (market: string, resolution = "15", hours = 24) =>
+    request<{ results: number[][] }>(`/api/markets/${market}/klines?resolution=${resolution}&hours=${hours}`),
   account: () => request("/api/account"),
   positions: () => request<{ results: unknown[] }>("/api/positions"),
   openOrders: (market?: string) => request<{ results: unknown[] }>(`/api/orders${market ? `?market=${market}` : ""}`),
